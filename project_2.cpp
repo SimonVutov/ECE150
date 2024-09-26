@@ -37,30 +37,24 @@ unsigned int count(unsigned int n, unsigned int b) {
 }
 
 unsigned int swap_bytes(unsigned int n, unsigned int b0, unsigned int b1) {
-    // Ensure that b0 and b1 are within the valid range [0, 3]
-    assert(b0 <= 3);
-    assert(b1 <= 3);
+    if (b0 == b1) return n;
 
-    // If the bytes are the same, return n unchanged
-    if (b0 == b1) {
-        return n;
-    }
+    // Calculate the bit positions for the bytes
+    unsigned int shift0 = b0 * 8;
+    unsigned int shift1 = b1 * 8;
 
-    // Calculate the byte masks for the two positions
-    unsigned int shift_b0 = b0 * 8;  // b0 byte shift
-    unsigned int shift_b1 = b1 * 8;  // b1 byte shift
+    // Extract the bytes at positions b0 and b1
+    unsigned int byte0 = (n >> shift0) & 0xFF;
+    unsigned int byte1 = (n >> shift1) & 0xFF;
 
-    // Extract the bytes from the respective positions
-    unsigned int byte_b0 = (n >> shift_b0) & 0xFF; // Extract byte at b0
-    unsigned int byte_b1 = (n >> shift_b1) & 0xFF; // Extract byte at b1
+    // Create a mask for the bytes to be swapped
+    unsigned int mask = (0xFF << shift0) | (0xFF << shift1);
 
-    // Clear the b0 and b1 byte positions in n
-    n &= ~(0xFF << shift_b0); // Clear b0 byte
-    n &= ~(0xFF << shift_b1); // Clear b1 byte
+    // Remove the original bytes from n
+    n &= ~mask;
 
-    // Place the swapped bytes back into the cleared positions
-    n |= (byte_b0 << shift_b1); // Place b0 byte in b1's position
-    n |= (byte_b1 << shift_b0); // Place b1 byte in b0's position
+    // Place the swapped bytes back into n
+    n |= (byte0 << shift1) | (byte1 << shift0);
 
     return n;
 }
