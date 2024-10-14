@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 int main() {
   double a = -1, b = -1, c = -1, d = -1, e = -1, f = -1, g = -1;
@@ -75,22 +75,33 @@ int main() {
   double P3100 = (eg / e) * 100;
   double P4100 = (fg / f) * 100;
   double P5100 = (gg / g) * 100;
-  if (M100 < F100) M100 = F100;
-  if (P1100 < F100) P1100 = F100;
-  if (P2100 < F100) P2100 = F100;
-  if (P3100 < F100) P3100 = F100;
-  if (P4100 < F100) P4100 = F100;
-  if (P5100 < F100) P5100 = F100;
+  if (M100 < F100)
+    M100 = F100;
+  if (P1100 < F100)
+    P1100 = F100;
+  if (P2100 < F100)
+    P2100 = F100;
+  if (P3100 < F100)
+    P3100 = F100;
+  if (P4100 < F100)
+    P4100 = F100;
+  if (P5100 < F100)
+    P5100 = F100;
 
   double E100 = (F100 * 0.75 + M100 * 0.25);
   double P100 = (P1100 + P2100 + P3100 + P4100 + P5100) / 5;
 
   double final_grade;
 
-  if (F100 >= 60) final_grade = E100 * (2.0/3.0) + P100 * (1.0/3.0);
-  else if (F100 <= 40) final_grade = F100;
-  //else if (F100 > 40 && F100 < 60) final_grade = P100 * (1.0 / 3.0) * ((E100 - 40.0) / 20.0) + E100 * (1 - ((E100 - 40.0) / 20.0));
-  else if (F100 > 40 && F100 < 60) final_grade = (-1.0/60.0)*E100*E100 + (5.0/3.0)*E100 + (1.0/60.0)*P100*E100 - (2.0/3.0)*P100;
+  if (F100 >= 60)
+    final_grade = E100 * (2.0 / 3.0) + P100 * (1.0 / 3.0);
+  else if (F100 <= 40)
+    final_grade = F100;
+  // else if (F100 > 40 && F100 < 60) final_grade = P100 * (1.0 / 3.0) * ((E100
+  // - 40.0) / 20.0) + E100 * (1 - ((E100 - 40.0) / 20.0));
+  else if (F100 > 40 && F100 < 60)
+    final_grade = (-1.0 / 60.0) * E100 * E100 + (5.0 / 3.0) * E100 +
+                  (1.0 / 60.0) * P100 * E100 - (2.0 / 3.0) * P100;
 
   int final_grade_int = round(final_grade + 1e-12);
   std::cout << "Your final grade is: " << final_grade_int << std::endl;
